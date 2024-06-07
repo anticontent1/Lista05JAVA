@@ -25,10 +25,10 @@ public class Condominium {
         var diff = dueDate.until(today, ChronoUnit.DAYS);
 
         if (diff > 0) {
-            return calculateFee();
+            return calculateFee(diff);
         }
 
-        return calculateFee(diff);
+        return calculateFee();
     }
 
     public Double calculateFee() {
