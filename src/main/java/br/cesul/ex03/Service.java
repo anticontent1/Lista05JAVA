@@ -13,6 +13,23 @@ public class Service extends SaleItem {
         this.time = time;
     }
 
+
+    @Override
+    public Double getFinalPrice() {
+        var total = price * time * getAdditionalFee();
+        total += total * iss / 100;
+
+        return total;
+    }
+
+    private double getAdditionalFee() {
+        return switch (category) {
+            case STANDARD -> 1.03;
+            case SUPERIOR -> 1.05;
+            default -> 1.1;
+        };
+    }
+
     public ServiceCategory getCategory() {
         return category;
     }
