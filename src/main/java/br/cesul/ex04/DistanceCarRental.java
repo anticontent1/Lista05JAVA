@@ -1,5 +1,7 @@
 package br.cesul.ex04;
 
+import br.cesul.ex04.exception.UnsfishedRentalException;
+
 public class DistanceCarRental extends CarRental {
 
     private final Double hiredDistance;
@@ -11,7 +13,18 @@ public class DistanceCarRental extends CarRental {
     }
 
     @Override
-    public double getRentalTotal() {
+    public double getRentalTotal() throws UnsfishedRentalException {
+        if (getStatus() != RentalStatus.FINISHED) {
+            throw new UnsfishedRentalException();
+        }
+
+        var total = hiredDistance * price;
+
+        if (usedDistance > hiredDistance) {
+            var exceeded = (usedDistance - hiredDistance) * price;
+            total += exceeded * 1.2;
+        }
+
         return 0;
     }
 

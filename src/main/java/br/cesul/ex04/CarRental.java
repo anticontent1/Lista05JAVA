@@ -1,11 +1,13 @@
 package br.cesul.ex04;
 
+import br.cesul.ex04.exception.UnsfishedRentalException;
+
 public abstract class CarRental {
 
     private final String plate;
     private final String customer;
     private final String license;
-    private final Double price;
+    protected final Double price;
     private final boolean insurance;
 
     private RentalStatus status;
@@ -19,7 +21,7 @@ public abstract class CarRental {
         this.status = RentalStatus.IN_PROGRESS;
     }
 
-    public abstract double getRentalTotal();
+    public abstract double getRentalTotal() throws UnsfishedRentalException;
 
     protected void finish() {
         this.status = RentalStatus.FINISHED;
