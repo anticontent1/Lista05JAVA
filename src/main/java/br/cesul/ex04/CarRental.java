@@ -2,15 +2,18 @@ package br.cesul.ex04;
 
 import br.cesul.ex04.exception.UnsfishedRentalException;
 
+import java.time.LocalDate;
+
 public abstract class CarRental {
 
     private final String plate;
     private final String customer;
     private final String license;
     protected final Double price;
-    private final boolean insurance;
+    protected final boolean insurance;
 
     private RentalStatus status;
+    protected LocalDate finishDate;
 
     public CarRental(String plate, String customer, String license, Double price, boolean insurance) {
         this.plate = plate;
@@ -25,6 +28,7 @@ public abstract class CarRental {
 
     protected void finish() {
         this.status = RentalStatus.FINISHED;
+        this.finishDate = LocalDate.now();
     }
 
     public String getPlate() {
@@ -49,5 +53,9 @@ public abstract class CarRental {
 
     public RentalStatus getStatus() {
         return status;
+    }
+
+    public LocalDate getFinishDate() {
+        return finishDate;
     }
 }
